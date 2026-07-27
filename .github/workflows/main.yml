@@ -25,20 +25,16 @@ jobs:
       - name: Make Maven Wrapper Executable
         run: chmod +x mvnw
 
-      # -T 1C uses parallel threads to speed up downloads
-      # --fail-fast stops the build immediately on network errors instead of waiting 20 minutes
-      - name: Fast Build with Maven
+      # Skips execution of frontend-maven-plugin yarn/npm installation
+      - name: Fast Build JHipster WAR
         env:
           NODE_TLS_REJECT_UNAUTHORIZED: "0"
-          PHANTOMJS_CDNURL: "https://npmmirror.com/mirrors/phantomjs/"
           OPENSSL_CONF: "/dev/null"
         run: |
-          ./mvnw -B -T 1C clean package \
+          ./mvnw -B clean package \
             -DskipTests \
-            -Pprod \
-            -Dhttp.keepAlive=false \
-            -Dmaven.wagon.http.pool=false \
-            -Dmaven.wagon.http.retryHandler.count=3
+            -Dskip.installnodenpm=true \
+            -Dmaven.test.skip=true
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
