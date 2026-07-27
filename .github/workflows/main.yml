@@ -1,4 +1,4 @@
-name: JHipster CI Build
+name: JHipster CI Build 
 
 on:
   push:
