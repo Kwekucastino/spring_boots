@@ -1,4 +1,4 @@
-name: JHipster CI Build 
+name: JHipster CI Build
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     name: Build and Test
-    runs-on: ubuntu-20.04 # Pin to Ubuntu 20.04 for compatibility with legacy glibc / Node 6 binaries
+    runs-on: ubuntu-22.04  # <--- Updated from 20.04 to an active runner
 
     steps:
       # Step 1: Check out the repository
